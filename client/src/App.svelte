@@ -1,29 +1,33 @@
 <script>
 	import Event from "./components/Event.svelte";
+	import EventsList from "./components/EventsList.svelte";
 	
     async function fetchTickets() {
         const res = await fetch("./get_bath_info");
-	    return res.json();
+        const json= await res.json();
+        
+        // update date string that was given from JSON
+        return json.map(e => 
+            ({...e, date: new Date(e.date).setHours(0,0,0,0)})
+        );
     }
     function refreshPage() {
         events_promise = fetchTickets();
     }
 
-    let events = [];
+    let today = new Date().setHours(0,0,0,0);
     let events_promise = fetchTickets();
 </script>
 
 <div class="mt-2 mx-auto max-w-xl bg-white shadow-md px-3 py-5">
 <button on:click={refreshPage}>Refresh</button>
-<h1>Today</h1>
+
+
 {#await events_promise}
 	<p>...waiting</p>
 {:then events}
-<div class="space-y-3 divide-y divide-solid">
-	{#each events as event (event.id)}
-		<Event {event}/>
-	{/each}
-</div>
+    <EventsList name="Today" events={events} filter={e => e.date === today}/>
+    <EventsList name="Later Dates" events={events} filter={e => e.date > today}/>
 {:catch error}
 	<p style="color: red">{error.message}</p>
 {/await}
