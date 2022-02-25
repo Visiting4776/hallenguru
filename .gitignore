@@ -1,2 +1,4 @@
 # python virtual environment
-env/
+/env/
+/client/node_modules/
+/client/public/build/
