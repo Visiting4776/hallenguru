@@ -71,6 +71,8 @@ def get_slot_info(bath_id: int, year: int, month: int) -> List:
             'start_time': times[0],
             'end_time': times[1],
             'state': state,
-            'from_date': from_date
+            'from_date': from_date,
+            'link': 'https://pretix.eu'+event['href'],
+            'id': event['href'].split('/')[-2]
         })
     return events
