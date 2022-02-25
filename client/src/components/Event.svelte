@@ -8,9 +8,10 @@
             <div class="font-light opacity-80">{event.name} ({event.state}) {event.date}</div>
             <div class="text-xl tracking-tight">{event.start_time} - {event.end_time}</div>
         </div>
-        <a href='{event.link}'><button class="px-2 py-2 text-white transition-all duration-100 bg-green-600 border-none shadow 
-        active:bg-green-700 
-        hover:bg-green-500 hover:shadow-none"
+        <a href='{event.link}'><button class="px-1 py-1 text-white transition-all duration-100 bg-green-600 border-2 border-green-600 shadow 
+        active:bg-green-700 active:border-green-700
+        hover:bg-green-500 hover:border-green-500 hover:shadow-none
+        disabled:border-gray-200 disabled:border-2 disabled:bg-transparent disabled:shadow-none"
         disabled={event.state!='available'}>Book Now</button></a>
     </div>
 </div>
