@@ -7,7 +7,6 @@
 		const res = await fetch("./get_bath_info");
 		events = await res.json();
 	});
-
 	// function getBaths() {
 	// 	fetch("./get_bath_info")
 	// 		.then(d => d.text())
