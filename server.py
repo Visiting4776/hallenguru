@@ -1,5 +1,7 @@
-from flask import Flask, send_from_directory
-from scraping.lib import get_slot_info
+import os
+import csv
+from flask import Flask, send_from_directory, jsonify
+import scraping
 app = Flask(__name__)
 
 @app.route("/")
@@ -13,8 +15,10 @@ def home(path):
 
 @app.route("/get_bath_info")
 def get_bath_info():
-    events = get_slot_info(2, 2022, 2)
-    return str(events)
+    events = [dict(event, name=scraping.baths[bath_id])
+                for bath_id in scraping.baths.keys()
+                for event in scraping.get_slot_info(bath_id, 2022, 2)]
+    return jsonify(events)
 
 if __name__ == "__main__":
     app.run(debug=True)
