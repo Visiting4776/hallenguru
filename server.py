@@ -11,12 +11,18 @@ def index():
 def home(path):
     return send_from_directory('client/public', path)
 
-@app.route("/api/baths")
-def get_bath_info():
+@app.route("/api/ticketinfo/<int:bath_id>")
+def get_tickets_for_bath(bath_id):
     events = [dict(event, name=scraping.baths[bath_id])
-                for bath_id in scraping.baths.keys()
                 for event in scraping.get_slot_info(bath_id, 2022, 2)]
     return jsonify(events)
+
+@app.route("/api/ticketinfo")
+def get_ticket_info():
+    # events = [dict(event, name=scraping.baths[bath_id])
+    #             for bath_id in scraping.baths.keys()
+    #             for event in scraping.get_slot_info(bath_id, 2022, 2)]
+    # return jsonify(events)
     return jsonify([
     {
         "bath_id": 1, 
@@ -32,72 +38,17 @@ def get_bath_info():
     {
         "bath_id": 1, 
         "date": "Sat, 26 Feb 2022 00:00:00 GMT", 
-        "end_time": "10:45", 
-        "from_date": "", 
-        "id": "2561104", 
-        "link": "https://pretix.eu/Baeder/1/2561104/", 
-        "name": "Stadtbad Mitte", 
-        "start_time": "08:45", 
-        "state": "soldout"
-    }, 
-    {
-        "bath_id": 1, 
-        "date": "Sat, 27 Feb 2022 00:00:00 GMT", 
         "end_time": "13:00", 
         "from_date": "", 
         "id": "2561105", 
         "link": "https://pretix.eu/Baeder/1/2561105/", 
         "name": "Stadtbad Mitte", 
         "start_time": "11:00", 
-        "state": "soldout"
+        "state": "available"
     }, 
     {
         "bath_id": 1, 
-        "date": "Sat, 27 Feb 2022 00:00:00 GMT", 
-        "end_time": "13:00", 
-        "from_date": "", 
-        "id": "2561105", 
-        "link": "https://pretix.eu/Baeder/1/2561105/", 
-        "name": "Stadtbad Mitte", 
-        "start_time": "11:00", 
-        "state": "soldout"
-    }, 
-    {
-        "bath_id": 1, 
-        "date": "Sat, 27 Feb 2022 00:00:00 GMT", 
-        "end_time": "13:00", 
-        "from_date": "", 
-        "id": "2561105", 
-        "link": "https://pretix.eu/Baeder/1/2561105/", 
-        "name": "Stadtbad Mitte", 
-        "start_time": "11:00", 
-        "state": "soldout"
-    }, 
-    {
-        "bath_id": 1, 
-        "date": "Sat, 27 Feb 2022 00:00:00 GMT", 
-        "end_time": "13:00", 
-        "from_date": "", 
-        "id": "2561105", 
-        "link": "https://pretix.eu/Baeder/1/2561105/", 
-        "name": "Stadtbad Mitte", 
-        "start_time": "11:00", 
-        "state": "soldout"
-    }, 
-    {
-        "bath_id": 1, 
-        "date": "Sat, 27 Feb 2022 00:00:00 GMT", 
-        "end_time": "13:00", 
-        "from_date": "", 
-        "id": "2561105", 
-        "link": "https://pretix.eu/Baeder/1/2561105/", 
-        "name": "Stadtbad Mitte", 
-        "start_time": "11:00", 
-        "state": "soldout"
-    }, 
-    {
-        "bath_id": 1, 
-        "date": "Sat, 27 Feb 2022 00:00:00 GMT", 
+        "date": "Sat, 26 Feb 2022 00:00:00 GMT", 
         "end_time": "13:00", 
         "from_date": "", 
         "id": "2561105", 
@@ -108,25 +59,25 @@ def get_bath_info():
     }, 
     {
         "bath_id": 1, 
-        "date": "Sat, 27 Feb 2022 00:00:00 GMT", 
+        "date": "Sat, 26 Feb 2022 00:00:00 GMT", 
         "end_time": "13:00", 
         "from_date": "", 
         "id": "2561105", 
         "link": "https://pretix.eu/Baeder/1/2561105/", 
         "name": "Stadtbad Mitte", 
         "start_time": "11:00", 
-        "state": "soldout"
+        "state": "available"
     }, 
     {
         "bath_id": 1, 
-        "date": "Sat, 27 Feb 2022 00:00:00 GMT", 
+        "date": "Sat, 26 Feb 2022 00:00:00 GMT", 
         "end_time": "15:15", 
         "from_date": "", 
         "id": "2561106", 
         "link": "https://pretix.eu/Baeder/1/2561106/", 
         "name": "Stadtbad Mitte", 
-        "start_time": "13:15", 
-        "state": "soldout"
+        "start_time": "05:15", 
+        "state": "available"
     }])
 
 if __name__ == "__main__":

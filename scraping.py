@@ -76,3 +76,7 @@ def get_slot_info(bath_id: int, year: int, month: int) -> List:
             'id': event['href'].split('/')[-2]
         })
     return events
+
+def get_baths():
+    url = 'https://www.berlinerbaeder.de/app_data/facilities_app.json'
+    
