@@ -17,20 +17,25 @@
         // update date string that was given from JSON
         return all_events.map(e => 
             ({...e, date: new Date(e.date).setHours(0,0,0,0)})
-        );
+        ).sort(eventSorter);
     }
 
     function refreshPage() {
         events_promise = fetchTickets();
     }
 
-    function eventSorter(a, b) {
-        if(a.start_time < b.start_time) {return -1};
-        if(a.start_time > b.start_time) {return 1};
+    function eventSorter(a, b) {
+        if(a.date < b.date) {return -1};
+        if(a.date > b.date) {return 1};
+        //events start on the same day
+        if(a.start_time < b.start_time) {return -1};
+        if(a.start_time > b.start_time) {return 1};
+        //event starting time must be equal
         return 0;
     }
 
     const bath_ids = [1,2,7,9,11,15,17,18,19,21,24,26,27,28,29,30,31,34,38,42,43,45,46,47,48,49,51,52,54,60,61,62,64,68,70,71,74,76,79,81];
+    // const bath_ids = [42,47];
     let parsed_baths = 0;
     let today = new Date().setHours(0,0,0,0);
 
@@ -56,7 +61,7 @@
             <p>Loading: {parsed_baths}/{bath_ids.length}</p>
         {:then events}
             <EventsList name="Today" events={
-                events.filter(e => e.date === today && allowed_states.includes(e.state)).sort(eventSorter)
+                events.filter(e => e.date === today && allowed_states.includes(e.state))
             }/>
             <EventsList name="Later Dates" events={
                 events.filter(e => e.date > today && allowed_states.includes(e.state))
