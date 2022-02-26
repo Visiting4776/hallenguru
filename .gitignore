@@ -2,4 +2,4 @@
 */__pycache__/
 /env/
 /client/node_modules/
-/client/public/build/
+__pycache__/
