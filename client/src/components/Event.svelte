@@ -21,7 +21,8 @@
         <a href='{event.link}'><button class="px-1 py-1 text-white transition-all duration-100 bg-green-600 border-2 border-green-600 shadow 
         active:bg-green-700 active:border-green-700
         hover:bg-green-500 hover:border-green-500 hover:shadow-none
-        disabled:border-gray-200 disabled:border-2 disabled:bg-transparent disabled:shadow-none"
+        disabled:border-gray-200 disabled:border-2 disabled:bg-transparent disabled:shadow-none
+        whitespace-nowrap"
         disabled={event.state!='available'}>Book Now</button></a>
     </div>
 </div>
