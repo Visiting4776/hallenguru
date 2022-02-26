@@ -1,34 +1,36 @@
 <script>
 	import EventsList from "./components/EventsList.svelte";
 	
-    async function fetchTickets() {
+    async function fetchTickets() { //returns a promise
         //TODO: instead make API call and get bath info from server
         let all_events = [];
         parsed_baths = 0;
-        for(let i=0; i<bath_ids.length; i++){
-            console.log(i);
-            const res = await fetch(`./api/ticketinfo/${bath_ids[i]}`);
+
+        await Promise.all(bath_ids.map(async (id) => {
+            const res = await fetch(`./api/ticketinfo/${id}`);
             const json= await res.json(); //a list of objects, not a string
 
             all_events = [...all_events, ...json];
             parsed_baths++;
-        }
+        }))
 
         // update date string that was given from JSON
         return all_events.map(e => 
             ({...e, date: new Date(e.date).setHours(0,0,0,0)})
         );
     }
+
     function refreshPage() {
         events_promise = fetchTickets();
     }
+
     function eventSorter(a, b) {
         if(a.start_time < b.start_time) {return -1};
         if(a.start_time > b.start_time) {return 1};
         return 0;
     }
 
-    const bath_ids = [1,2,7,9,11,15];
+    const bath_ids = [1,2,7,9,11,15,17,18,19,21,24,26,27,28,29,30,31,34,38,42,43,45,46,47,48,49,51,52,54,60,61,62,64,68,70,71,74,76,79,81];
     let parsed_baths = 0;
     let today = new Date().setHours(0,0,0,0);
 
