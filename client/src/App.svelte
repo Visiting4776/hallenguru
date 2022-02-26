@@ -1,6 +1,7 @@
 <script>
 	import EventsList from "./components/EventsList.svelte";
-	
+	import { writable } from "svelte/store";
+
     async function fetchTickets() { //returns a promise
         //TODO: instead make API call and get bath info from server
         let all_events = [];

@@ -1,4 +1,5 @@
 from flask import Flask, send_from_directory, jsonify
+from datetime import datetime
 import scraping
 app = Flask(__name__)
 
@@ -13,8 +14,9 @@ def home(path):
 
 @app.route("/api/ticketinfo/<int:bath_id>")
 def get_tickets_for_bath(bath_id):
+    today = datetime.now()
     events = [dict(event, name=scraping.baths[bath_id])
-                for event in scraping.get_slot_info(bath_id, 2022, 2)]
+                for event in scraping.get_slot_info(bath_id, today.year, today.month)]
     return jsonify(events)
 
 @app.route("/api/ticketinfo")
