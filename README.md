@@ -1,3 +1,8 @@
+Quickly find public pools in Berlin where time slots are still available for purchase.
+
+![screenshot](https://user-images.githubusercontent.com/15891394/155847162-e5e26cc1-07eb-45c4-a927-9e4a728a3bd6.jpg)
+
+
 ### setup
 
 1) Create a new `python3` environment: `python3 -m venv env`
