@@ -1,4 +1,4 @@
-**Demo:** http://hallenguru.herokuapp.com/
+**Demo:** https://hallenguru.herokuapp.com/
 
 Quickly find public pools in Berlin where time slots are still available for purchase.
 
